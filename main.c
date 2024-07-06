@@ -26,6 +26,12 @@
 #define DURATION_UPPER_LIMIT 100
 #define TEST_SUCCESS 1
 
+/**
+ * @brief Check if the command line argument is invalid.
+ *
+ * @param input The command line argument to check.
+ * @return true if the argument is invalid, false otherwise.
+ */
 bool invalid_cli(char input[]) // check if the argument from cli is invalid
 {
   if(strcmp (input, ARG_A)!=EQUAL){
@@ -40,6 +46,11 @@ bool invalid_cli(char input[]) // check if the argument from cli is invalid
   return false;
 }
 
+/**
+ * @brief Get the number of lines from the user and ensure it is valid.
+ *
+ * @return The number of lines entered by the user.
+ */
 int get_lines_num() // check if lines number is valid
 {
   int lines_num = INVALID;
@@ -78,6 +89,12 @@ int get_lines_num() // check if lines number is valid
   return lines_num;
 }
 
+/**
+ * @brief Check if the character is a valid name character (digit or lowercase letter).
+ *
+ * @param c The character to check.
+ * @return true if the character is valid, false otherwise.
+ */
 bool valid_name(char c){
   if(((c>LETTER_Z)||(c<LETTER_A))&&((c>NINE_DIGIT)||(c<ZERO_DIGIT))){
     return false;
@@ -85,6 +102,12 @@ bool valid_name(char c){
   return true;
 }
 
+/**
+ * @brief Check if the character is a valid distance character (digit).
+ *
+ * @param c The character to check.
+ * @return true if the character is valid, false otherwise.
+ */
 bool valid_distance(char c){
   if((c>NINE_DIGIT)||(c<ZERO_DIGIT)){
     return false;
@@ -92,12 +115,27 @@ bool valid_distance(char c){
   return true;
 }
 
+/**
+ * @brief Update the details of a bus line.
+ *
+ * @param line The bus line to update.
+ * @param line_name The name of the bus line.
+ * @param distance The distance of the bus line.
+ * @param duration The duration of the bus line.
+ */
 void update_line(BusLine *line, char *line_name, int distance, int duration){
   strcpy (line->name, line_name);
   line->distance = distance;
   line->duration = duration;
 }
 
+/**
+ * @brief Get the details of bus lines from the user.
+ *
+ * @param bus_lines The array of bus lines to populate.
+ * @param lines_num The number of lines to get details for.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on failure.
+ */
 int get_lines_details(BusLine *bus_lines, int lines_num){
   char buf[INPUT_LINE_LENGTH];
   for(int i=0;i<lines_num;i++) // one iteration represents one bus line
@@ -177,6 +215,12 @@ int get_lines_details(BusLine *bus_lines, int lines_num){
   return EXIT_SUCCESS;
 }
 
+/**
+ * @brief Print the sorted array of bus lines.
+ *
+ * @param bus_lines The array of bus lines to print.
+ * @param lines_num The number of bus lines.
+ */
 void print_sorted_array(BusLine *bus_lines, int lines_num){
   for(int i=0; i < lines_num; i++){
     printf("%s,%d,%d\n", bus_lines->name, bus_lines->distance,
@@ -185,6 +229,14 @@ void print_sorted_array(BusLine *bus_lines, int lines_num){
   }
 }
 
+/**
+ * @brief Perform tests on the sorting functions and print the results.
+ *
+ * @param copy_start Pointer to the start of the copy array.
+ * @param copy_end Pointer to the end of the copy array.
+ * @param original_start Pointer to the start of the original array.
+ * @param original_end Pointer to the end of the original array.
+ */
 void test_mode(BusLine *copy_start, BusLine *copy_end, BusLine
 *original_start, BusLine *original_end){
   quick_sort (copy_start, copy_end, DISTANCE);
@@ -236,7 +288,13 @@ void test_mode(BusLine *copy_start, BusLine *copy_end, BusLine
     printf("TEST 6 FAILED\n");
   }
 }
-
+/**
+ * @brief Main function to run the program.
+ *
+ * @param argc The number of command line arguments.
+ * @param argv The command line arguments.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on failure.
+ */
 int main (int argc, char *argv[])
 {
   if(argc != VALID_ARGC || invalid_cli (argv[COMMAND]))
