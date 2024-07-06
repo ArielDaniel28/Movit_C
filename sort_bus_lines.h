@@ -2,11 +2,19 @@
 #define EX2_REPO_SORTBUSLINES_H
 #include <string.h>
 #define NAME_LEN 21
+
+/**
+ * @brief Structure representing a bus line with a name, distance, and duration.
+ */
 typedef struct BusLine
 {
     char name[NAME_LEN];
     int distance, duration;
 } BusLine;
+
+/**
+ * @brief Enum representing the type of sorting criteria.
+ */
 typedef enum SortType
 {
     DISTANCE,
